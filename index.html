@@ -377,29 +377,58 @@ img{max-width:100%}
 .theme-name{font-size:.82rem;font-weight:700;flex:1;color:var(--text);font-family:var(--ff-display)}
 .theme-desc{font-size:.66rem;color:var(--text-muted)}
 
-/* Theme thumbs */
-.tt-classic{background:#fff;flex-direction:column;align-items:flex-start;padding:.5rem .6rem;gap:3px}
+/* Themes qui se centrent verticalement dans le thumb */
+.tt-classic,.tt-exec,.tt-min,.tt-bord,.tt-kente{
+  align-self:center;width:100%;
+}
+/* Themes qui remplissent toute la hauteur */
+.tt-corp,.tt-ed{
+  align-self:stretch;width:100%;
+}
+
+.tt-classic{background:#fff;display:flex;flex-direction:column;align-items:flex-start;padding:.5rem .6rem;gap:3px;justify-content:center}
 .tt-cl-head{height:28px;background:#1e2d3d;border-radius:3px;width:100%;margin-bottom:4px;display:flex;align-items:center;padding:0 6px;gap:5px}
 .tt-cl-av{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.3);flex-shrink:0}
 .tt-cl-nm{height:4px;background:rgba(255,255,255,.6);border-radius:2px;width:55%;flex:1}
 
-.tt-exec{background:#f8f5f0;padding:.5rem .6rem;flex-direction:column;gap:3px}
+.tt-exec{background:#f8f5f0;display:flex;padding:.5rem .6rem;flex-direction:column;gap:3px;justify-content:center}
 .tt-ex-n{font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;color:#1c1812}
 .tt-ex-s{height:1.5px;background:linear-gradient(90deg,#8b6914,transparent);margin:.25rem 0}
 
-.tt-corp{background:#fff;display:grid;grid-template-columns:32px 1fr;height:100%;padding:0}
-.tt-corp-bar{background:#1e2d3d;padding:.4rem .3rem;display:flex;flex-direction:column;gap:3px;align-items:center}
-.tt-corp-av{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.25)}
+/* Corporate — barre latérale navy + contenu */
+.tt-corp{
+  background:#fff;width:100%;height:100%;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:row;padding:0;
+}
+.tt-corp-bar{
+  width:32px;flex-shrink:0;
+  background:#1e2d3d;padding:.45rem .3rem;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.tt-corp-av{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.3)}
+.tt-corp-content{flex:1;padding:.45rem .4rem;display:flex;flex-direction:column;gap:3px;justify-content:center}
 
-.tt-min{background:#fff;padding:.6rem;display:flex;flex-direction:column;gap:3px}
+.tt-min{background:#fff;display:flex;padding:.6rem;flex-direction:column;gap:3px;justify-content:center}
 .tt-mn-n{font-size:.65rem;font-weight:900;color:#1c1812;border-bottom:2px solid #1c1812;padding-bottom:2px;margin-bottom:3px}
 
-.tt-bord{background:#fffdf8;border:2px solid #c8a832;margin:6px;border-radius:4px;padding:.45rem;flex-direction:column;gap:3px;width:calc(100% - 12px)}
+.tt-bord{background:#fffdf8;border:2px solid #c8a832;margin:6px;border-radius:4px;padding:.45rem;display:flex;flex-direction:column;gap:3px;width:calc(100% - 12px);justify-content:center}
 .tt-brd-n{font-family:'Playfair Display',serif;font-size:.65rem;font-style:italic;color:#1c1812;text-align:center}
 
-.tt-ed{background:#fff;display:grid;grid-template-columns:1fr 1.4fr;height:100%;padding:0}
-.tt-ed-l{background:#f8f5f0;padding:.4rem .35rem;display:flex;flex-direction:column;gap:2px}
-.tt-ed-r{padding:.4rem .35rem;display:flex;flex-direction:column;gap:2px}
+/* Timeline — colonne date + colonne contenu */
+.tt-ed{
+  background:#fff;width:100%;height:100%;
+  display:flex;flex-direction:row;padding:0;overflow:hidden;
+}
+.tt-ed-l{
+  width:52px;flex-shrink:0;
+  background:#f8f5f0;padding:.45rem .35rem;
+  display:flex;flex-direction:column;gap:3px;justify-content:center;
+}
+.tt-ed-r{
+  flex:1;padding:.45rem .4rem;
+  display:flex;flex-direction:column;gap:3px;justify-content:center;
+}
 .tt-line{height:3.5px;background:#e8e0d5;border-radius:2px}
 .tt-line.s{width:65%}.tt-line.d{background:#1e2d3d;width:70%}
 
@@ -1239,9 +1268,23 @@ kbd{display:inline-block;padding:.08rem .28rem;background:var(--bld-surf);border
         </div>
 
         <div class="theme-card" onclick="App.openBuilderWithTheme('corporate')">
-          <div class="theme-thumb tt-corp">
-            <div class="tt-corp-bar"><div class="tt-corp-av"></div><div class="tt-line" style="background:rgba(255,255,255,.2);width:80%;margin-top:4px"></div><div class="tt-line s" style="background:rgba(255,255,255,.15)"></div></div>
-            <div style="padding:.4rem .35rem"><div class="tt-line d"></div><div class="tt-line s d"></div><div class="tt-line d" style="margin-top:4px"></div></div>
+          <div class="theme-thumb" style="background:#fff;display:flex;flex-direction:row;align-items:stretch;padding:0;overflow:hidden">
+            <!-- Barre latérale navy -->
+            <div style="width:34px;flex-shrink:0;background:#1e2d3d;display:flex;flex-direction:column;align-items:center;padding:.5rem .3rem;gap:5px">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.28);flex-shrink:0"></div>
+              <div style="width:16px;height:3px;background:rgba(255,255,255,.2);border-radius:2px"></div>
+              <div style="width:13px;height:3px;background:rgba(255,255,255,.14);border-radius:2px"></div>
+              <div style="width:15px;height:3px;background:rgba(255,255,255,.1);border-radius:2px"></div>
+            </div>
+            <!-- Contenu principal -->
+            <div style="flex:1;padding:.5rem .5rem;display:flex;flex-direction:column;justify-content:center;gap:4px">
+              <div style="height:4px;background:#1e2d3d;border-radius:2px;width:80%"></div>
+              <div style="height:2.5px;background:#c8a832;border-radius:2px;width:55%"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;margin-top:5px"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;width:70%"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;margin-top:4px"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;width:65%"></div>
+            </div>
           </div>
           <div class="theme-info">
             <span class="theme-icon">🏢</span>
@@ -1278,9 +1321,23 @@ kbd{display:inline-block;padding:.08rem .28rem;background:var(--bld-surf);border
         </div>
 
         <div class="theme-card" onclick="App.openBuilderWithTheme('timeline')">
-          <div class="theme-thumb tt-ed">
-            <div class="tt-ed-l"><div class="tt-line s" style="background:#c8bfb0"></div><div class="tt-line" style="background:#c8bfb0;margin-top:4px"></div></div>
-            <div class="tt-ed-r"><div class="tt-line d"></div><div class="tt-line s d"></div><div class="tt-line d" style="margin-top:4px"></div></div>
+          <div class="theme-thumb" style="background:#fff;display:flex;flex-direction:row;align-items:stretch;padding:0;overflow:hidden">
+            <!-- Colonne dates -->
+            <div style="width:52px;flex-shrink:0;background:#f8f5f0;display:flex;flex-direction:column;justify-content:center;padding:.5rem .4rem;gap:6px">
+              <div style="height:3px;background:#c8bfb0;border-radius:2px;width:100%"></div>
+              <div style="height:3px;background:#c8bfb0;border-radius:2px;width:75%"></div>
+              <div style="height:3px;background:#c8bfb0;border-radius:2px;width:100%;margin-top:4px"></div>
+              <div style="height:3px;background:#c8bfb0;border-radius:2px;width:80%"></div>
+              <div style="height:3px;background:#c8bfb0;border-radius:2px;width:100%;margin-top:4px"></div>
+            </div>
+            <!-- Colonne contenu -->
+            <div style="flex:1;padding:.5rem .4rem;display:flex;flex-direction:column;justify-content:center;gap:6px">
+              <div style="height:3.5px;background:#1e2d3d;border-radius:2px;width:90%"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;width:65%"></div>
+              <div style="height:3.5px;background:#1e2d3d;border-radius:2px;width:85%;margin-top:4px"></div>
+              <div style="height:3px;background:#e8e0d5;border-radius:2px;width:70%"></div>
+              <div style="height:3.5px;background:#1e2d3d;border-radius:2px;width:80%;margin-top:4px"></div>
+            </div>
           </div>
           <div class="theme-info">
             <span class="theme-icon">⏱</span>
